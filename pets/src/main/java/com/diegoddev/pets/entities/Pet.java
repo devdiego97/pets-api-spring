@@ -4,9 +4,17 @@ package com.diegoddev.pets.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="pets")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pet {
       
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +33,6 @@ public class Pet {
     private String sex;
 
     @NotBlank(message = "idade do pet obrigatório")
-    @Size(min = 8,max = 9,message = "a idade do pet deve estar entre 8 ou 9 caracteres")
     private Integer age;
 
     @NotBlank(message = "raça do pet obrigatório")

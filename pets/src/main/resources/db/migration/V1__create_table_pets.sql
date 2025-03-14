@@ -1,0 +1,10 @@
+
+CREATE TABLE pets(
+     id BIGINT PRIMARY KEY AUTO_INCREMENT,
+     name VARCHAR(30) NOT NULL,
+     color VARCHAR(30) NOT NULL,
+     sex VARCHAR(9) NOT NULL,
+     age INTEGER NOT NULL,
+     race VARCHAR(50) NOT NULL
+
+);
