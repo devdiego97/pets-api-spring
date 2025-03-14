@@ -2,6 +2,7 @@ package com.diegoddev.pets.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,11 +28,10 @@ public class PetsController {
     this.petService=petService;
   } 
 
-
     @PostMapping()
-    public String addNewPet(){
-       return "hell";
-        
+     public ResponseEntity<Pet> addPet(@RequestBody Pet pet) {
+        Pet savedPet = petService.createPet(pet);
+        return ResponseEntity.ok(savedPet);
     }
     @GetMapping()
     public ResponseEntity<List<Pet>> getAllPets(){
@@ -38,20 +39,23 @@ public class PetsController {
         return ResponseEntity.ok(pets);
     }
     
-
     @GetMapping("/{id}")
-    public String getPetById(@PathVariable Long id){
-        return "pet id";
+       public ResponseEntity<Pet> getPetById(@PathVariable Long id) {
+          Pet petId=petService.findPetById(id);
+          return ResponseEntity.ok(petId);
     }
-    @PutMapping()
-    public String updatePetById(){
-        return "lista de pets";
+    @PutMapping("/{id}")
+    public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody Pet updatedPet) {
+        Pet pet = petService.updatePetId(id, updatedPet);
+        return ResponseEntity.ok(pet);
     }
-
-    @DeleteMapping()
-    public String deletePetById(){
-        return "lista de pets";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePet(@PathVariable Long id) {
+        petService.deletePetId(id);
+        return ResponseEntity.ok("Pet excluído com sucesso");
     }
     
+
+  
 
 }

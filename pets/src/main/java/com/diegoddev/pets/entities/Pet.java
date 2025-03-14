@@ -2,7 +2,10 @@ package com.diegoddev.pets.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,11 +31,14 @@ public class Pet {
     @Size(min = 3,max = 30,message = "o cor do pet deve estar entre 3 e 30 caracteres")
     private String color;
 
-    @NotBlank(message = "sexo do pet obrigatório")
-    @Size(min = 8,max = 9,message = "o sexo do pet deve estar entre 8 ou 9 caracteres")
+    @NotBlank(message = "sexo do pet obrigatório") 
+    @Size(min=5,max=5,message = "o sexo do pet deve ser macho ou femea")
     private String sex;
 
-    @NotBlank(message = "idade do pet obrigatório")
+    
+    @NotNull(message = "A idade não pode ser nula")
+    @Min(value = 0, message = "A idade não pode ser negativa")
+    @Max(value = 100, message = "A idade não pode ser maior que 100")
     private Integer age;
 
     @NotBlank(message = "raça do pet obrigatório")
